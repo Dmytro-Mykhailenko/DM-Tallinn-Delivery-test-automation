@@ -15,19 +15,23 @@ public class BaseSetupApi {
     protected static String bearerToken;
 
 
-
     @BeforeAll
     public static void setUp() throws ConfigurationException {
 
+        //read config file
         configuration = new PropertiesConfiguration();
         configuration.load(PATH_TO_CONFIG);
+
+        //get data from config
         RestAssured.baseURI = configuration.getString("base-url");
-        String u = configuration.getString("username");
-        String p = configuration.getString("password");
-        bearerToken = ApiClient.authorizeAndGetToken(u, p);
+        String username = configuration.getString("username");
+        String password = configuration.getString("password");
+
+        //auth
+        bearerToken = ApiClient.authorizeAndGetToken(username, password);
     }
 
-    public RequestSpecification getAuthenticatedRequestSpecification(){
+    public RequestSpecification getAuthenticatedRequestSpecification() {
         RequestSpecBuilder builder = new RequestSpecBuilder();
         builder.setContentType(ContentType.JSON);
         builder.addHeader("Authorization", "Bearer " + bearerToken);

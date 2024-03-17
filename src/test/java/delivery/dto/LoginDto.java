@@ -1,8 +1,9 @@
 package delivery.dto;
+
 public class LoginDto {
 
-    String username;
-    String password;
+    private String username;
+    private String password;
 
     public LoginDto(String username, String password) {
         this.username = username;

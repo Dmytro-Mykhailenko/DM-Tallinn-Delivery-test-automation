@@ -3,6 +3,7 @@ package delivery.utils;
 import com.google.gson.Gson;
 import delivery.api.BaseSetupApi;
 import delivery.dto.LoginDto;
+import delivery.dto.OrderDto;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -10,13 +11,13 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 public class ApiClient extends BaseSetupApi {
-    public static Response getOrders(RequestSpecification spec){
+    public static Response getOrders(RequestSpecification spec) {
 
         return given()
                 .spec(spec)
                 .log()
                 .all()
-                .get( "orders")
+                .get("orders")
                 .then()
                 .log()
                 .all()
@@ -24,14 +25,29 @@ public class ApiClient extends BaseSetupApi {
                 .response();
     }
 
-    public static String authorizeAndGetToken(String username, String password){
+    public static Response createOrder(RequestSpecification spec, OrderDto orderDto) {
+
+        return given()
+                .spec(spec)
+                .log()
+                .all()
+                .body(orderDto)
+                .post("orders")
+                .then()
+                .log()
+                .all()
+                .extract()
+                .response();
+    }
+
+    public static String authorizeAndGetToken(String username, String password) {
 
         return given()
                 .log()
                 .all()
                 .contentType(ContentType.JSON)
-                .body( new Gson().toJson( new LoginDto(username,password) ) )
-                .post("login/student" )
+                .body(new Gson().toJson(new LoginDto(username, password)))
+                .post("login/student")
                 .then()
                 .log()
                 .all()
