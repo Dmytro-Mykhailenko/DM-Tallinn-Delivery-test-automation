@@ -17,6 +17,9 @@ public class OrderDto {
     private String comment;
     private int id;
 
+    public OrderDto() {
+    }
+
     public static OrderDto createRandomOrder() {
 
         return OrderDto.builder()

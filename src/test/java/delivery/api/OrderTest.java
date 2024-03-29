@@ -1,12 +1,11 @@
 package delivery.api;
 
-import com.google.gson.Gson;
 import delivery.dto.OrderDto;
+import delivery.utils.ApiClient;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import delivery.utils.ApiClient;
 
 public class OrderTest extends BaseSetupApi {
 
@@ -29,6 +28,20 @@ public class OrderTest extends BaseSetupApi {
                 () -> Assertions.assertEquals(HttpStatus.SC_OK, response.getStatusCode(), "Status code is OK"),
                 () -> Assertions.assertEquals("OPEN", response.path("status"), "New order status is OPEN"),
                 () -> Assertions.assertNotEquals(0, (int) response.path("id"), "New order ID not equal 0")
+        );
+
+    }
+
+    @Test
+    void deleteRandomOrderAndCheckResponse() {
+
+        Response createResponse = ApiClient.createOrder(getAuthenticatedRequestSpecification(), OrderDto.createRandomOrder());
+
+        Response deleteResponse = ApiClient.deleteOrderById(getAuthenticatedRequestSpecification(), createResponse.getBody().path("id"));
+
+        Assertions.assertAll("Order creation",
+                () -> Assertions.assertEquals(HttpStatus.SC_OK, deleteResponse.getStatusCode(), "Status code is OK"),
+                () -> Assertions.assertEquals("true", deleteResponse.asString(), "Response body contains \"true\"")
         );
 
     }

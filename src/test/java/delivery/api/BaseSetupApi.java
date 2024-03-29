@@ -32,7 +32,7 @@ public class BaseSetupApi {
         bearerToken = ApiClient.authorizeAndGetToken(username, password);
     }
 
-    public RequestSpecification getAuthenticatedRequestSpecification() {
+    public static RequestSpecification getAuthenticatedRequestSpecification() {
         RequestSpecBuilder builder = new RequestSpecBuilder();
         builder.setContentType(ContentType.JSON);
         builder.addHeader("Authorization", "Bearer " + bearerToken);
