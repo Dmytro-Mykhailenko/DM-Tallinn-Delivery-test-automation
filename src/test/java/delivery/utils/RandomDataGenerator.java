@@ -1,7 +1,6 @@
 package delivery.utils;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 
 public class RandomDataGenerator {
 
@@ -35,20 +34,12 @@ public class RandomDataGenerator {
 
     }
 
-    public static String generateValidApiKey() {
+    public static String getRandomString(int length) {
 
-        int length = 16;
-        boolean useLetters = false;
+        boolean useLetters = true;
         boolean useNumbers = true;
 
         return RandomStringUtils.random(length, useLetters, useNumbers);
 
     }
-
-    public static int generateValidId() {
-
-        return RandomUtils.nextInt(1, 10);
-
-    }
-
 }
