@@ -18,6 +18,7 @@
 - ***AspectJ Weaver, version: 1.9.4***
 - ***Gson, version: 2.10.1***
 - ***Project Lombok, version: 1.18.30***
+- ***Selenide, version: 7.2.3***
 
 ## Check-lists
 
