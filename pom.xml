@@ -21,6 +21,7 @@
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <gson.version>2.10.1</gson.version>
         <lombok.version>1.18.30</lombok.version>
+        <selenide.version>7.2.3</selenide.version>
     </properties>
 
     <dependencies>
@@ -73,6 +74,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.codeborne/selenide -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -96,6 +105,7 @@
                         <artifactId>aspectjweaver</artifactId>
                         <version>1.9.4</version>
                     </dependency>
+
                 </dependencies>
             </plugin>
             <!-- This is optional. It enables mvn goals: allure:serve allure:report -->

@@ -17,6 +17,18 @@ public class OrderDto {
     private String comment;
     private int id;
 
+    public OrderDto() {
+    }
+
+    public OrderDto(String status, int courierId, String customerName, String customerPhone, String comment, int id) {
+        this.status = status;
+        this.courierId = courierId;
+        this.customerName = customerName;
+        this.customerPhone = customerPhone;
+        this.comment = comment;
+        this.id = id;
+    }
+
     public static OrderDto createRandomOrder() {
 
         return OrderDto.builder()
